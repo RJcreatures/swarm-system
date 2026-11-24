@@ -1,0 +1,12 @@
+PASS V4 packet validation, sequence, four patterns, relative goals
+PASS No_Encoders host-stub syntax
+PASS Rear_Encoders host-stub syntax
+PASS normal four-wheel open-loop, stop, reverse, no fake telemetry, reject autonomous goal
+PASS two-rear-encoder PI, front matching, telemetry, capability gating, goal dedupe, stall latch
+PASS slave command-loss watchdog stops and latches fault
+PASS secondary master command-loss watchdog stops and latches fault
+PASS No_Encoders: all 8 identity builds against host stubs
+PASS Rear_Encoders: all 8 identity builds against host stubs
+PASS No_Encoders: dashboard JS syntax, endpoints, capabilities
+PASS Rear_Encoders: dashboard JS syntax, endpoints, capabilities
+PASS all offline checks (NOT a hardware/Arduino-core compilation)

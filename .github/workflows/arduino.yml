@@ -1,0 +1,27 @@
+name: ESP32 V4 firmware compile and host tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  offline-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run host tests and syntax checks
+        run: bash tests/run_checks.sh
+  compile-esp32:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [No_Encoders, Rear_Encoders]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install Espressif Arduino-ESP32 3.x (pinned)
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Compile actual classic ESP32 sketch
+        run: arduino-cli compile --warnings all --fqbn esp32:esp32:esp32 "firmware/${{ matrix.variant }}/SwarmRobot"
