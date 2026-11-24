@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+*.bin
+*.elf
+*.map
+*.o
+build/
+.arduino/
